@@ -1,0 +1,12 @@
+{
+  "name": "@vuejs/utils",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auojs/auojs.git",
+    "directory": "packages/vue-docs-loader"
+  },
+  "author": "auojs <auojs@outlook.com>",
+  "license": "MIT"
+}
