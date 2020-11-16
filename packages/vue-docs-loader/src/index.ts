@@ -1,1 +1,3 @@
-export default '1212';
+export function loader(souer: string) {
+  return souer;
+}

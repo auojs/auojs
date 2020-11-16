@@ -1,2 +1,3 @@
-# auojs-cli
-auojs Cli
+# auojs
+
+auojs

@@ -9,6 +9,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "allowJs": false,
+    "strict": true,
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
@@ -16,11 +17,11 @@
     "removeComments": false,
     "lib": [
       "esnext",
-      "dom",
-      "es2020"
-    ]
+      "dom"
+    ],
+    "types": ["node"],
   },
   "include": [
-    "packages/*/src"
+    "packages/**/*.ts"
   ]
 }
