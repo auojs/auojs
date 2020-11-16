@@ -1,7 +1,9 @@
 {
   "name": "@auojs/vue-docs-loader",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/vue-docs-loader.cjs.js",
+  "module": "dist/vue-docs-loader.esm.js",
+  "types": "dist/vue-docs-loader.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/auojs/auojs.git",
@@ -9,15 +11,21 @@
   },
   "author": "auojs <auojs@outlook.com>",
   "license": "MIT",
+  "buildOptions": {
+    "name": "VueDocsLoader",
+    "formats": [
+      "esm-bundler",
+      "cjs"
+    ]
+  },
   "devDependencies": {
     "@types/loader-utils": "^2.0.1",
     "@types/markdown-it": "^10.0.3",
     "@types/markdown-it-container": "^2.0.3",
-    "@types/webpack": "^4.41.25",
+    "loader-utils": "^2.0.0",
     "markdown-it": "^12.0.2",
     "markdown-it-container": "^3.0.0",
     "querystring": "^0.2.0",
-    "typescript": "^4.0.5",
-    "webpack": "^4.41.2"
+    "@auojs/utils": "^1.0.0"
   }
 }

@@ -1,7 +1,9 @@
 {
-  "name": "@vuejs/utils",
+  "name": "@auojs/utils",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/utils.cjs.js",
+  "module": "dist/utils.esm-bundler.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/auojs/auojs.git",

@@ -1,10 +1,8 @@
 import path from 'path';
 import typescript from 'rollup-plugin-typescript2';
 
-console.log(process.env, 'process.env');
-
 //const masterVersion = require('./package.json').version;
-const packagesDir = path.resolve(__dirname, 'packages');
+const packagesDir = path.resolve(__dirname, 'packages/@auojs');
 const packageDir = path.resolve(packagesDir, process.env.TARGET);
 const name = path.basename(packageDir);
 const resolve = (p) => path.resolve(packageDir, p);
@@ -22,7 +20,8 @@ const outputConfigs = {
   },
   cjs: {
     file: resolve(`dist/${name}.cjs.js`),
-    format: `cjs`
+    format: `cjs`,
+    exports: 'auto'
   },
   global: {
     file: resolve(`dist/${name}.global.js`),
@@ -51,8 +50,26 @@ const packageConfigs = packageFormats.map((format) => createConfig(format, outpu
 
 export default packageConfigs;
 
-function createConfig(format, output) {
+function createConfig(format, output, plugins = []) {
   const entryFile = `src/index.ts`;
+
+  const nodePlugins =
+    packageOptions.enableNonBrowserBranches && format !== 'cjs'
+      ? [
+          require('@rollup/plugin-node-resolve').nodeResolve({
+            preferBuiltins: true
+          }),
+          require('@rollup/plugin-commonjs')({
+            sourceMap: false
+          }),
+          require('rollup-plugin-node-builtins')(),
+          require('rollup-plugin-node-globals')()
+        ]
+      : [];
+
+  if (packageOptions.name) {
+    output.name = packageOptions.name;
+  }
 
   const tsPlugin = typescript({
     check: true,
@@ -64,13 +81,14 @@ function createConfig(format, output) {
         // declaration: true
         // declarationMap: true
       },
-      include: [resolve('src/**/*.ts')]
+      include: [resolve('src/**/*.ts')],
+      exclude: ['**/tests']
     }
   });
 
   return {
     input: resolve(entryFile),
     output,
-    plugins: [tsPlugin]
+    plugins: [tsPlugin, ...nodePlugins, ...plugins]
   };
 }

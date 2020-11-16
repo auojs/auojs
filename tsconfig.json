@@ -3,8 +3,8 @@
     "baseUrl": ".",
     "outDir": "dist",
     "sourceMap": false,
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es2015",
+    "module": "es2015",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "declaration": true,
@@ -16,12 +16,12 @@
     "noImplicitAny": true,
     "removeComments": false,
     "lib": [
-      "esnext",
-      "dom"
+      "es6",
+      "es7"
     ],
-    "types": ["node"],
+    "types": ["jest", "node"],
   },
   "include": [
-    "packages/**/*.ts"
+    "packages/@auojs/**/*.ts"
   ]
 }
