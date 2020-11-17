@@ -1,3 +1,3 @@
 module.exports = (ctx) => ({
-  base: 'auojs'
+  base: '/auojs/'
 });
