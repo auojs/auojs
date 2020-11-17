@@ -1,9 +1,10 @@
 import { containers } from './containers';
+import { ANode } from '@auojs/utils';
 
 export interface DDescriptor {
-  styles: any[];
-  script: string;
-  content: string;
+  styles: ANode[];
+  script: ANode | null;
+  content: string | null;
   vue: any[];
 }
 
@@ -12,8 +13,8 @@ const paramReg = /^(style|vue|script)[^\r\n\S]*(.*)$/;
 export function parse(source: string) {
   const descriptor: DDescriptor = {
     styles: [],
-    script: '',
-    content: '',
+    script: null,
+    content: null,
     vue: []
   };
 
@@ -24,16 +25,19 @@ export function parse(source: string) {
     render: (info: string, content: string) => {
       const t = info.trim().match(paramReg);
       if (!t) return;
-
-      switch (t[1]) {
+      const tag = t[1];
+      switch (tag) {
         case 'vue':
           descriptor.vue.push(content);
           break;
         case 'script':
-          descriptor.script = content;
+          descriptor.script = { tag: tag, children: [{ text: content }] };
           break;
         case 'style':
-          descriptor.styles.push(parseStyle(info, content));
+          descriptor.styles.push({
+            tag: tag,
+            children: [{ text: content }]
+          });
           break;
       }
     }
@@ -42,7 +46,7 @@ export function parse(source: string) {
   return { descriptor };
 }
 
-function parseStyle(info: string, content: string) {
+export function parseStyle(info: string, content: string) {
   const tt = info.match(/[^\s]*\s*(.*)/);
   let tag = ' ';
   if (tt) tag += tt[1];

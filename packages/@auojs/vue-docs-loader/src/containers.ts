@@ -20,7 +20,7 @@ export function containers(source: string, options: ContainerOption) {
     const reg = new RegExp(`${markers}([^\\r\\n]*)([\\s\\S]*?)${markers}`, 'g');
 
     content = source.replace(reg, (match: any, info: string, content: string) => {
-      if (!validate || !validate(info) || !render) return match;
+      if ((validate && !validate(info)) || !render) return match;
 
       render(info, content);
       return '';

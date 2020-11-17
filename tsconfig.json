@@ -19,9 +19,10 @@
       "es6",
       "es7"
     ],
-    "types": ["jest", "node"],
+    // "types": ["jest", "node"],
   },
   "include": [
-    "packages/@auojs/**/*.ts"
+    "packages/**/*.ts",
+    "**/*.spec.ts"
   ]
 }

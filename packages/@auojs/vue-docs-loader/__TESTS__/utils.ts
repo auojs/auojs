@@ -14,15 +14,15 @@ const baseConfig: webpack.Configuration = {
     alias: {}
   },
   resolveLoader: {
-    alias: {
-      'vue-docs-loader': require.resolve('../src/index.ts')
-    }
+    // alias: {
+    //   'vue-docs-loader': require.resolve('../src/index.ts')
+    // }
   },
   module: {
     rules: [
       {
         test: /\.md$/,
-        use: 'vue-docs-loader'
+        use: '@auojs/vue-docs-loader'
       }
     ]
   }
